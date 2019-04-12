@@ -15,7 +15,7 @@
                 <a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a>
             </li>
         </ul>
-        <h3>Essential Links</h3>
+        <h3>{{1555059833|formatTimer('hours')}}</h3>
         <ul>
             <li>
                 <a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a>

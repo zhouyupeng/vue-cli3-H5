@@ -3,20 +3,43 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const isProduction = process.env.NODE_ENV === 'production'
 const path = require('path')
+
+function resolve(dir) {
+    return path.join(__dirname, dir)
+}
+// cdn预加载使用
+const externals = {
+    'vue': 'Vue',
+    'vue-router': 'VueRouter',
+    'vuex': 'Vuex'
+}
+
+const cdn = {
+    // 开发环境
+    dev: {
+        css: [],
+        js: []
+    },
+    // 生产环境
+    build: {
+        css: [],
+        js: ['https://lib.baomitu.com/vue/2.6.6/vue.min.js',
+            'https://lib.baomitu.com/vue-router/3.0.1/vue-router.min.js',
+            'https://lib.baomitu.com/vuex/3.0.1/vuex.min.js'
+        ]
+    }
+}
+
 module.exports = {
     // 项目部署的基础路径 默认/
-    // 放在子目录时使用./
+    // 放在子目录时使用./或者加你的域名
     publicPath: process.env.PUBLIC_PATH,
     configureWebpack: config => {
-        // 使用cdn引入固定库
-        Object.assign(config, {
-            externals: {
-                vue: 'Vue',
-                vuex: 'Vuex',
-                'vue-router': 'VueRouter'
-            }
-        });
         if (isProduction) {
+            // cdn预加载使用
+            Object.assign(config, {
+                externals: externals
+            });
             // 为生产环境修改配置...
             // 上线压缩去除console等信息
             config.plugins.push(
@@ -53,7 +76,25 @@ module.exports = {
             // 为开发环境修改配置...
         }
     },
-    // 打包时不生成.map文件
+    chainWebpack: config => { // 对vue-cli内部的 webpack 配置进行更细粒度的修改。
+        // 添加CDN参数到htmlWebpackPlugin配置中， 详见public/index.html 修改
+
+        config.plugin('html').tap(args => {
+            if (process.env.NODE_ENV === 'production') {
+                args[0].cdn = cdn.build
+            }
+            if (process.env.NODE_ENV === 'development') {
+                args[0].cdn = cdn.dev
+            }
+            return args
+        })
+        // 设置目录别名alias
+        config.resolve.alias
+            .set('assets', '@/assets')
+            .set('components', '@/components')
+            .set('view', '@/view')
+            .set('style', '@/style')
+    },
     css: {
         loaderOptions: {
             postcss: {
@@ -65,13 +106,11 @@ module.exports = {
                 ]
             },
             sass: {
-                // @是src的别名,共享的全局变量  https://cli.vuejs.org/zh/guide/css.html#%E5%90%91%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8-loader-%E4%BC%A0%E9%80%92%E9%80%89%E9%A1%B9
-                data: `
-                  @import "@/assets/scss/mixin.scss"; @import "@/assets/scss/common.scss";
-                `
+                data: `@import "style/mixin.scss";`
             }
         }
     },
+    // 打包时不生成.map文件
     productionSourceMap: false
 
 }
