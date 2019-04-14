@@ -2,11 +2,7 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const isProduction = process.env.NODE_ENV === 'production'
-const path = require('path')
 
-function resolve(dir) {
-    return path.join(__dirname, dir)
-}
 // cdn预加载使用
 const externals = {
     'vue': 'Vue',
@@ -17,15 +13,16 @@ const externals = {
 const cdn = {
     // 开发环境
     dev: {
-        css: [],
+        css: ['https://lib.baomitu.com/mint-ui/2.2.13/actionsheet/style.min.css'],
         js: []
     },
     // 生产环境
     build: {
-        css: [],
+        css: ['https://lib.baomitu.com/mint-ui/2.2.13/actionsheet/style.min.css'],
         js: ['https://lib.baomitu.com/vue/2.6.6/vue.min.js',
             'https://lib.baomitu.com/vue-router/3.0.1/vue-router.min.js',
-            'https://lib.baomitu.com/vuex/3.0.1/vuex.min.js'
+            'https://lib.baomitu.com/vuex/3.0.1/vuex.min.js',
+            'https://lib.baomitu.com/axios/0.18.0/axios.min.js'
         ]
     }
 }
@@ -78,7 +75,6 @@ module.exports = {
     },
     chainWebpack: config => { // 对vue-cli内部的 webpack 配置进行更细粒度的修改。
         // 添加CDN参数到htmlWebpackPlugin配置中， 详见public/index.html 修改
-
         config.plugin('html').tap(args => {
             if (process.env.NODE_ENV === 'production') {
                 args[0].cdn = cdn.build
@@ -96,6 +92,13 @@ module.exports = {
             .set('style', '@/style')
     },
     css: {
+        // 是否使用css分离插件 ExtractTextPlugin
+        extract: true,
+        // 开启 CSS source maps?
+        sourceMap: false,
+        // css预设器配置项
+        // 启用 CSS modules for all css / pre-processor files.
+        modules: false,
         loaderOptions: {
             postcss: {
                 // 这是rem适配的配置  注意： remUnit在这里要根据common.scss规则来配制，如果您的设计稿是750px的，用75就刚刚好。
@@ -111,6 +114,15 @@ module.exports = {
         }
     },
     // 打包时不生成.map文件
-    productionSourceMap: false
+    productionSourceMap: false,
+    devServer: {
+        open: true, // 启动服务后是否打开浏览器
+        host: '127.0.0.1',
+        port: 8080, // 服务端口
+        https: false,
+        hotOnly: false,
+        // 设置代理，用来解决本地开发跨域问题，如果设置了代理，那你本地开发环境的axios的baseUrl要写为 '' ，即空字符串
+        proxy: 'https://api2.h5551.com/public/index.php' // 设置代理
+    }
 
 }
