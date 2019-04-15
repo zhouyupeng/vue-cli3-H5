@@ -28,8 +28,6 @@ const router = new Router({
         }
     ]
 })
-var a = 1
-var b = 7
 // 全局路由钩子函数 对全局有效
 router.beforeEach((to, from, next) => {
     let auth = to.meta.auth
