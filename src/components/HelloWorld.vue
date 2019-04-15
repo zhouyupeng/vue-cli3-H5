@@ -4,19 +4,31 @@
         <p class="msg">
             For a guide and recipes on how to configure / customize this project,
             <br>check out the
-            <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
+            <a
+                href="https://cli.vuejs.org"
+                target="_blank"
+                rel="noopener"
+            >vue-cli documentation</a>.
         </p>
         <h3>Installed CLI Plugins</h3>
-        <input type='text' value='1111'>
+        <input type="text" value="1111">
         <ul>
             <li>
-                <a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a>
+                <a
+                    href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"
+                    target="_blank"
+                    rel="noopener"
+                >babel</a>
             </li>
             <li>
-                <a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a>
+                <a
+                    href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint"
+                    target="_blank"
+                    rel="noopener"
+                >eslint</a>
             </li>
         </ul>
-        <h3>{{1555059833|formatTimer('hours')}}</h3>
+        <h3>{{ 1555059833 | formatTimer("hours") }}</h3>
         <ul>
             <li>
                 <a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a>
@@ -43,50 +55,58 @@
                 <a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a>
             </li>
             <li>
-                <a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a>
+                <a
+                    href="https://github.com/vuejs/vue-devtools#vue-devtools"
+                    target="_blank"
+                    rel="noopener"
+                >vue-devtools</a>
             </li>
             <li>
                 <a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a>
             </li>
             <li>
-                <a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a>
+                <a
+                    href="https://github.com/vuejs/awesome-vue"
+                    target="_blank"
+                    rel="noopener"
+                >awesome-vue</a>
             </li>
         </ul>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'HelloWorld',
-        props: {
-            msg: String
-        }
-    };
+export default {
+    name: 'HelloWorld',
+    props: {
+        msg: String
+    }
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-    h3 {
-        margin: 40px 0 0;
-    }
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
-    a {
-        color: #42b983;
-    }
-    .hello {
-        @include ell();
-    }
-    h1 {
-        font-size: 18px;
-    }
-    .msg {
-        font-size: 16px;
-    }
+h3 {
+    margin: 40px 0 0;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+li {
+    display: inline-block;
+    margin: 0 10px;
+}
+a {
+    color: #42b983;
+}
+.hello {
+    @include ell();
+}
+h1 {
+    font-size: 18px;
+}
+.msg {
+    font-size: 16px;
+}
 </style>

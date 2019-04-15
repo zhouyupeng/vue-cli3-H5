@@ -1,11 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-
 Vue.use(Router)
-
 const router = new Router({
-    routes: [{
+    routes: [
+        {
             path: '/',
             name: 'home',
             component: Home,
@@ -20,7 +19,8 @@ const router = new Router({
             // route level code-splitting
             // this generates a separate chunk (about.[hash].js) for this route
             // which is lazy-loaded when the route is visited.
-            component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
+            component: () =>
+                import(/* webpackChunkName: "about" */ './views/About.vue'),
             meta: {
                 auth: false,
                 keepAlive: true
@@ -28,13 +28,15 @@ const router = new Router({
         }
     ]
 })
+var a = 1
+var b = 7
 // 全局路由钩子函数 对全局有效
 router.beforeEach((to, from, next) => {
-    let auth = to.meta.auth;
+    let auth = to.meta.auth
     if (auth) {
-        console.log('需要登录');
+        console.log('需要登录')
     } else {
-        next();
+        next()
     }
 })
-export default router;
+export default router
