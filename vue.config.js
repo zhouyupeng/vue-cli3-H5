@@ -15,14 +15,14 @@ const cdn = {
     // 开发环境
     dev: {
         css: [
-            'https://lib.baomitu.com/mint-ui/2.2.13/actionsheet/style.min.css'
+            'https://lib.baomitu.com/mint-ui/2.2.13/style.min.css'
         ],
         js: []
     },
     // 生产环境
     build: {
         css: [
-            'https://lib.baomitu.com/mint-ui/2.2.13/actionsheet/style.min.css'
+            'https://lib.baomitu.com/mint-ui/2.2.13/style.min.css'
         ],
         js: [
             'https://lib.baomitu.com/vue/2.6.6/vue.min.js',

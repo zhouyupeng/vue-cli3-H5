@@ -1,6 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
-import { Indicator } from 'mint-ui'
+import { Indicator ,Toast} from 'mint-ui'
 axios.defaults.timeout = 12000 // 请求超时时间
 axios.defaults.baseURL = process.env.BASE_URL
 axios.defaults.headers.post['Content-Type'] =
@@ -23,14 +23,24 @@ axios.interceptors.response.use(
         // 如果返回的状态码为200，说明接口请求成功，可以正常拿到数据
         // 否则的话抛出错误 结合自身业务和后台返回的接口状态约定写respone拦截器
         Indicator.close()
-        if (response.status === 200) {
+        console.log('response',response);
+        if (response.status === 200&&response.data.code===0) {
             return Promise.resolve(response)
         } else {
+            Toast({
+                message: response.data.msg,
+                position: 'middle',
+                duration: 2000
+              });
             return Promise.reject(response)
         }
     },
     error => {
-        Indicator.open(error.message)
+             Toast({
+                message: response.data.msg,
+                position: 'middle',
+                duration: 2000
+              });
         return Promise.reject(error)
     }
 )
