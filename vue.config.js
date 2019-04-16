@@ -96,6 +96,7 @@ module.exports = {
             .set('components', '@/components')
             .set('view', '@/view')
             .set('style', '@/style')
+            .set('api', '@/api')
     },
     css: {
         // 是否使用css分离插件 ExtractTextPlugin
