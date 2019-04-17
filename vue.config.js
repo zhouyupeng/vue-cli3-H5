@@ -3,7 +3,6 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
     .BundleAnalyzerPlugin
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const isProduction = process.env.NODE_ENV === 'production'
-
 // cdn预加载使用
 const externals = {
     vue: 'Vue',
@@ -36,7 +35,7 @@ const cdn = {
 module.exports = {
     // 项目部署的基础路径 默认/
     // 放在子目录时使用./或者加你的域名
-    publicPath: process.env.PUBLIC_PATH,
+    publicPath: process.env.BASE_URL,
     configureWebpack: config => {
         if (isProduction) {
             // cdn预加载使用
@@ -97,6 +96,7 @@ module.exports = {
             .set('view', '@/view')
             .set('style', '@/style')
             .set('api', '@/api')
+            .set('store', '@/store')
     },
     css: {
         // 是否使用css分离插件 ExtractTextPlugin

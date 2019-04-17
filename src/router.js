@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import store from 'store/index'
 Vue.use(Router)
 const router = new Router({
     routes: [
@@ -9,7 +10,7 @@ const router = new Router({
             name: 'home',
             component: Home,
             meta: {
-                auth: false, // 是否需要登录
+                auth: true, // 是否需要登录
                 keepAlive: true // 是否缓存组件
             }
         },
@@ -25,14 +26,31 @@ const router = new Router({
                 auth: false,
                 keepAlive: true
             }
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: () =>
+                import(/* webpackChunkName: "login" */ './views/login.vue'),
+            meta: {
+                auth: false,
+                keepAlive: true
+            }
         }
     ]
 })
+
 // 全局路由钩子函数 对全局有效
 router.beforeEach((to, from, next) => {
     let auth = to.meta.auth
-    if (auth) {
-        console.log('需要登录')
+    let token = store.getters.token;
+
+    if (auth) { // 需要登录
+        if (token) {
+            next()
+        } else {
+            next('/login')
+        }
     } else {
         next()
     }

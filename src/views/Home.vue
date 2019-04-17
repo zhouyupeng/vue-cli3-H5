@@ -8,22 +8,22 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue';
-import {mapActions} from 'vuex'
+import { getIndex } from 'api/index';
 export default {
     name: 'home',
     components: {
         HelloWorld
     },
-    created(){
-
-       this.login()
+    created() {
+        getIndex();
+        // this.login({
+        //     $router: this.$router
+        // });
     },
-    mounted () {
+    mounted() {
         // console.log(this.$store);
     },
 
-    methods:{
-        ...mapActions(['login'])
-    }
+    methods: {}
 };
 </script>

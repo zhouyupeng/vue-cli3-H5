@@ -1,28 +1,49 @@
 import * as type from './mutations_types'
-import api from 'api/index'
+import { login } from 'api/index'
+import { Toast } from 'mint-ui';
 export default {
     state: {
-        token: localStorage.getItem("token") || '',
-        user:JSON.parse(localStorage.getItem("token_user")) || {}
+        token: localStorage.getItem('token') || '',
+        user: JSON.parse(localStorage.getItem('token_user')) || {}
     },
-    mutations:{
-        
-        [type.LOGIN](state,data){
+    mutations: {
 
+        [type.LOGIN](state, data) {
+            let userDate = data.data;
+            state.token = userDate.token;
+            state.user = userDate;
+            localStorage.setItem('token', userDate.token)
+            localStorage.setItem('userDate', JSON.stringify(userDate))
         }
-            
+
     },
     actions: {
-        login(state){
-                api.login().then((data)=>{
-                
-                state.commit(type.LOGIN,data);
-            }).catch((error)=>{
+        async login(state, data) {
+            try {
+                let res = await login({
+                    username: data.username,
+                    password: data.password
+                })
+                state.commit(type.LOGIN, res);
+                Toast({
+                    message: '登录成功',
+                    position: 'middle',
+                    duration: 2000
+                });
+                setTimeout(() => {
+                    data.$router.push('/');// 登录后重定向
+                }, 3000);
+            } catch (error) {
 
-            })
-            
+            }
         }
+    },
+    getters: {
+        token(state) {
+            return state.token
+        },
+        user(state) {
+            return state.user
         }
-
-    
+    }
 }

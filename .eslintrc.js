@@ -20,7 +20,9 @@ module.exports = {
         //关闭函数名与后面括号间必须空格规则
         'space-before-function-paren': 0,
         // 关闭var 声明，每个声明占一行规则。
-        'one-var': 0
+        'one-var': 0,
+        "no-console": 0
+
     },
     parserOptions: {
         parser: 'babel-eslint'
