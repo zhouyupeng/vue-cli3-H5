@@ -16,12 +16,9 @@ export default {
     },
     created() {
         getIndex();
-        // this.login({
-        //     $router: this.$router
-        // });
+        
     },
     mounted() {
-        // console.log(this.$store);
     },
 
     methods: {}

@@ -11,7 +11,7 @@ axios.defaults.headers.post['Content-Type'] =
 axios.interceptors.request.use(
     config => {
         // 可在此设置要发送的token
-        let token = store.getters.token;
+        let token = store.getters['login/token'];
         token && (config.headers.token = token)
         Indicator.open('数据加载中')
         return config

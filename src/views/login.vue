@@ -21,11 +21,10 @@ export default {
     components: {},
     created() {},
     mounted() {
-        // console.log(this.$store);
     },
 
     methods: {
-        ...mapActions(['login']),
+        ...mapActions('login',['login']),
         loginBtn() {
             if (this.username === '' || this.password === '') {
                 Toast({

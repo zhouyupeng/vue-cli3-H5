@@ -2,9 +2,10 @@ import * as type from './mutations_types'
 import { login } from 'api/index'
 import { Toast } from 'mint-ui';
 export default {
+    namespaced: true,
     state: {
         token: localStorage.getItem('token') || '',
-        user: JSON.parse(localStorage.getItem('token_user')) || {}
+        user: JSON.parse(localStorage.getItem('userDate')) || {}
     },
     mutations: {
 
@@ -43,6 +44,7 @@ export default {
             return state.token
         },
         user(state) {
+            console.log('state',state);
             return state.user
         }
     }
