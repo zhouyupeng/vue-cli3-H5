@@ -32,12 +32,10 @@ export default {
                     duration: 2000
                 });
                 setTimeout(() => {
-                    const redirect = data.$route.query.redirect
-                    if (redirect) {
-                        data.$router.push(redirect)
-                    } else {
-                        data.$router.push('/');// 登录后重定向
-                    }
+                    const redirect = data.$route.query.redirect || '/';
+                    data.$router.replace({
+                        path: redirect
+                    })
                 }, 3000);
             } catch (error) {
 

@@ -1,7 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
 import store from 'store/index'
-import router from '@/router.js'
 import { Indicator, Toast } from 'mint-ui'
 axios.defaults.timeout = 12000 // 请求超时时间
 axios.defaults.baseURL = process.env.VUE_APP_BASE_API
@@ -45,8 +44,6 @@ axios.interceptors.response.use(
         switch (responseCode) {
             // 401：未登录
             case 401:
-                // 跳转登录页
-                router.push('/login')
                 break
             // 404请求不存在
             case 404:
