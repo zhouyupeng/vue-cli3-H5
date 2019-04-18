@@ -7,7 +7,10 @@ const isProduction = process.env.NODE_ENV === 'production'
 const externals = {
     vue: 'Vue',
     'vue-router': 'VueRouter',
-    vuex: 'Vuex'
+    vuex: 'Vuex',
+    'mint-ui': 'MINT',
+    axios: 'axios'
+
 }
 
 const cdn = {
@@ -27,7 +30,8 @@ const cdn = {
             'https://lib.baomitu.com/vue/2.6.6/vue.min.js',
             'https://lib.baomitu.com/vue-router/3.0.1/vue-router.min.js',
             'https://lib.baomitu.com/vuex/3.0.1/vuex.min.js',
-            'https://lib.baomitu.com/axios/0.18.0/axios.min.js'
+            'https://lib.baomitu.com/axios/0.18.0/axios.min.js',
+            'https://lib.baomitu.com/mint-ui/2.2.13/index.js'
         ]
     }
 }
@@ -38,7 +42,7 @@ module.exports = {
     publicPath: process.env.BASE_URL,
     configureWebpack: config => {
         if (isProduction) {
-            // cdn预加载使用
+            // externals里的模块不打包
             Object.assign(config, {
                 externals: externals
             })
@@ -108,15 +112,15 @@ module.exports = {
         modules: false,
         loaderOptions: {
             postcss: {
-                // 这是rem适配的配置  注意： remUnit在这里要根据common.scss规则来配制，如果您的设计稿是750px的，用75就刚刚好。
+                // 这是rem适配的配置
                 plugins: [
                     require('postcss-px2rem')({
-                        remUnit: 75
+                        remUnit: 100
                     })
                 ]
             },
             sass: {
-                data: '@import "style/mixin.scss";'
+                data: '@import "style/_mixin.scss";@import "style/_variables.scss";' // 全局引入
             }
         }
     },

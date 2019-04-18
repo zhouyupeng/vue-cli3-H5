@@ -32,7 +32,12 @@ export default {
                     duration: 2000
                 });
                 setTimeout(() => {
-                    data.$router.push('/');// 登录后重定向
+                    const redirect = data.$route.query.redirect
+                    if (redirect) {
+                        data.$router.push(redirect)
+                    } else {
+                        data.$router.push('/');// 登录后重定向
+                    }
                 }, 3000);
             } catch (error) {
 
@@ -44,7 +49,7 @@ export default {
             return state.token
         },
         user(state) {
-            console.log('state',state);
+            console.log('state', state);
             return state.user
         }
     }

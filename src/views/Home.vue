@@ -15,11 +15,9 @@ export default {
         HelloWorld
     },
     created() {
-        getIndex();
-        
+        getIndex({ pageSiza: 100, num: 10 });
     },
-    mounted() {
-    },
+    mounted() {},
 
     methods: {}
 };

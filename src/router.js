@@ -23,7 +23,7 @@ const router = new Router({
             component: () =>
                 import(/* webpackChunkName: "about" */ './views/About.vue'),
             meta: {
-                auth: false,
+                auth: true,
                 keepAlive: true
             }
         },
@@ -35,6 +35,14 @@ const router = new Router({
             meta: {
                 auth: false,
                 keepAlive: true
+            }
+        },
+        {
+            path: '*', // 未匹配到路由时重定向
+            redirect: '/',
+            meta: {
+                // auth: true,
+                // keepAlive: true
             }
         }
     ]
@@ -49,7 +57,12 @@ router.beforeEach((to, from, next) => {
         if (token) {
             next()
         } else {
-            next('/login')
+            next({
+                name: 'login',
+                query: {
+                    redirect: to.path
+                }
+            })
         }
     } else {
         next()

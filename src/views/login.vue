@@ -20,11 +20,10 @@ export default {
     },
     components: {},
     created() {},
-    mounted() {
-    },
+    mounted() {},
 
     methods: {
-        ...mapActions('login',['login']),
+        ...mapActions('login', ['login']),
         loginBtn() {
             if (this.username === '' || this.password === '') {
                 Toast({
@@ -36,7 +35,8 @@ export default {
                 this.login({
                     username: this.username,
                     password: this.password,
-                    $router: this.$router
+                    $router: this.$router,
+                    $route: this.$route
                 });
             }
         }

@@ -3,10 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store/index'
 import filters from './filters/index'
-import 'style/common.scss' // common css
-// api.getIndex().then(res => {
-//     console.log(res)
-// })
+
 // 注入全局过滤器
 Object.keys(filters).forEach(item => {
     Vue.filter(item, filters[item])

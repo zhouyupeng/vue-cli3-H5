@@ -1,6 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 import store from 'store/index'
+import router from '@/router.js'
 import { Indicator, Toast } from 'mint-ui'
 axios.defaults.timeout = 12000 // 请求超时时间
 axios.defaults.baseURL = process.env.VUE_APP_BASE_API
@@ -39,11 +40,29 @@ axios.interceptors.response.use(
         }
     },
     error => {
-        Toast({
-            message: error.data,
-            position: 'middle',
-            duration: 2000
-        });
+        Indicator.close()
+        const responseCode = error.response.status
+        switch (responseCode) {
+            // 401：未登录
+            case 401:
+                // 跳转登录页
+                router.push('/login')
+                break
+            // 404请求不存在
+            case 404:
+                Toast({
+                    message: '网络请求不存在',
+                    position: 'middle',
+                    duration: 2000
+                });
+                break
+            default:
+                Toast({
+                    message: error.response.data.message,
+                    position: 'middle',
+                    duration: 2000
+                });
+        }
         return Promise.reject(error)
     }
 )

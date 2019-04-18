@@ -1,7 +1,7 @@
 <template>
     <div class="hello">
         <h1>用户名:{{ user.name}}</h1>
-        <img :src="user.portrait" alt="">
+        <img :src="user.portrait" alt>
         <p class="msg">
             For a guide and recipes on how to configure / customize this project,
             <br>check out the
@@ -18,18 +18,17 @@
 </template>
 
 <script>
-import { mapGetters ,mapState} from 'vuex'
+import { mapGetters, mapState } from 'vuex';
 export default {
     name: 'HelloWorld',
     props: {
         msg: String
     },
-     created() {
-     },
+    created() {},
     computed: {
-        //vuex modules 中的gettes,state获取方式，modules中要定义namespaced: true
+        // vuex modules 中的gettes,state获取方式，modules中要定义namespaced: true
         // ...mapGetters('login',['user','token']),
-        ...mapState('login',['user','token'])
+        ...mapState('login', ['user', 'token'])
     }
 };
 </script>

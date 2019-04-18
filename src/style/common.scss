@@ -170,3 +170,14 @@ html {
         font-size: 13.33333vw
     }
 }
+
+@media screen and (min-width: 769px) {
+    html {
+        font-size: 102.4PX
+    }
+
+    html #app {
+        width: 768PX;
+        margin: 0 auto
+    }
+}
