@@ -10,7 +10,7 @@ const router = new Router({
             name: 'home',
             component: Home,
             meta: {
-                auth: true, // 是否需要登录
+                auth: false, // 是否需要登录
                 keepAlive: true // 是否缓存组件
             }
         },

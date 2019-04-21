@@ -16,7 +16,7 @@ wx.config({
     nonceStr: '',
     signature: '',
     timestamp: '',
-    jsApiList: ['onMenuShareTimeline' , 'onMenuShareAppMessage',]
+    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage']
 })
 Vue.config.productionTip = false
 Vue.config.devtools = true
