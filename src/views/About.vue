@@ -57,9 +57,9 @@ a {
     @include ell();
 }
 h1 {
-    font-size: 18px;
+    font-size: 36px;
 }
 .msg {
-    font-size: 16px;
+    font-size: 32px;
 }
 </style>

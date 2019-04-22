@@ -9,6 +9,7 @@
 </template>
 
 <style lang="scss">
+@import "./node_modules/normalize.css/normalize";
 @import "style/common.scss";
 #app {
     font-family: "Avenir", Helvetica, Arial, sans-serif;

@@ -9,15 +9,14 @@ Vue.use(wechat);
 Object.keys(filters).forEach(item => {
     Vue.filter(item, filters[item])
 })
-
-const wx = Vue.wechat;
-wx.config({
-    appId: '',
-    nonceStr: '',
-    signature: '',
-    timestamp: '',
-    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage']
-})
+// const wx = Vue.wechat;
+// wx.config({
+//     appId: '',
+//     nonceStr: '',
+//     signature: '',
+//     timestamp: '',
+//     jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage']
+// })
 Vue.config.productionTip = false
 Vue.config.devtools = true
 new Vue({

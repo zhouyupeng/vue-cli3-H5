@@ -4,7 +4,7 @@
             <router-link to="/">Home</router-link>|
             <router-link to="/about">About</router-link>
         </div>
-        
+
         <img alt="Vue logo" src="../assets/logo.png">
         <HelloWorld msg="Welcome to Your Vue.js App"/>
     </div>
@@ -21,6 +21,7 @@ export default {
     },
     created() {
         getIndex({ pageSiza: 100, num: 10 });
+        // console.log(this.$wechat)
     },
     mounted() {},
 
