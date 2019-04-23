@@ -13,7 +13,7 @@
         </div>
         <div class="btnBox">
         <button @click="loginBtn" class="loginBtn">登录</button>
-            
+
         </div>
     </section>
 </template>
@@ -68,14 +68,16 @@ export default {
         }
         .list {
             height: 100px;
-            margin: 0 45px;
+            margin: 0 45px 2px 45px;
             border-bottom: 1PX solid #dcdcdc;
             position: relative;
             input {
                 width: 100%;
                 display: block;
-                line-height: 100px;
+                box-sizing: border-box;
+                @include line-height(100px, 100px);
                 font-size: 28px;
+                border: none;
                 padding-left: 60px;
             }
             i {
@@ -86,7 +88,7 @@ export default {
         .userNameBox {
             i {
                 width: 24px;
-                top: 30px;
+                top: 34px;
                 height: 36px;
                 background: url('~assets/phone_ico.png') no-repeat left center;
                 background-size: contain;
@@ -103,11 +105,9 @@ export default {
         }
         .btnBox{
          margin: 68px 45px 0 45px;
-
         .loginBtn {
             @include line-height(90px,
             90px);
-           
             font-size:32px;
             border-radius: 90px;
             background: linear-gradient(to right,#f9d191,#f9b490);

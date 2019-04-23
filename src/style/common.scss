@@ -80,20 +80,12 @@ html {
 }
 
 @media screen and (min-width: 769px) {
-    html {
+     html {
         font-size: 102.4PX;
-        font-size: 13.33333vw
-    }
-}
-
-@media screen and (min-width: 769px) {
-    html {
-        font-size: 102.4PX
-    }
-
-    html #app {
-        width: 768PX;
-        margin: 0 auto
+        #app {
+            width: 768PX;
+            margin: 0 auto
+        }
     }
 }
 
@@ -104,3 +96,4 @@ html {
     visibility: hidden;
     height: 0
 }
+input,button,select,textarea{outline:none}
