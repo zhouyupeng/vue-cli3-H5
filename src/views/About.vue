@@ -1,6 +1,6 @@
 <template>
     <div class="about">
-         <div id="nav">
+        <div id="nav">
             <router-link to="/">Home</router-link>|
             <router-link to="/about">About</router-link>
         </div>
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex';
+import { mapState } from 'vuex';
 export default {
     name: 'about',
     props: {
