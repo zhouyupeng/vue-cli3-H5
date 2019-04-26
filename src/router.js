@@ -50,6 +50,7 @@ const router = new Router({
 
 // 全局路由钩子函数 对全局有效
 router.beforeEach((to, from, next) => {
+    console.log(to)
     let auth = to.meta.auth
     let token = store.getters['login/token'];
 
@@ -60,7 +61,7 @@ router.beforeEach((to, from, next) => {
             next({
                 path: '/login',
                 query: {
-                    redirect: to.path
+                    redirect: to.fullPath
                 }
             })
         }
