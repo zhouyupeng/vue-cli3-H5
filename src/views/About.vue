@@ -60,6 +60,5 @@ h1 {
     font-size: 36px;
 }
 .msg {
-    font-size: 32px;
-}
+    font-size: 32px;}
 </style>

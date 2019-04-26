@@ -26,7 +26,6 @@ axios.interceptors.response.use(
         // 如果返回的状态码为200，说明接口请求成功，可以正常拿到数据
         // 否则的话抛出错误 结合自身业务和后台返回的接口状态约定写respone拦截器
         Indicator.close()
-        console.log('response', response);
         if (response.status === 200 && response.data.code === 0) {
             return Promise.resolve(response)
         } else {
@@ -60,7 +59,7 @@ axios.interceptors.response.use(
                     duration: 2000
                 });
         }
-        return Promise.reject(error)
+        return Promise.reject(error.response)
     }
 )
 /**
@@ -81,6 +80,7 @@ function get (url, params = {}) {
                 reject(err.data)
             })
     })
+    // 或者return axios.get();
 }
 /**
  * post方法，对应post请求
@@ -98,6 +98,7 @@ function post (url, params) {
                 reject(err.data)
             })
     })
+    //  或者return axios.post();
 }
 
 export { get, post }

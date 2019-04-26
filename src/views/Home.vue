@@ -19,9 +19,11 @@ export default {
     components: {
         HelloWorld
     },
-    created() {
-        getIndex({ pageSiza: 100, num: 10 });
-        // console.log(this.$wechat)
+    async created() {
+        try {
+            await getIndex({ pageSiza: 100, num: 10 });
+        } catch (err) {
+        }
     },
     mounted() {},
 
