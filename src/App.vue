@@ -1,12 +1,24 @@
 <template>
     <div id="app">
-        <keep-alive>
-            <router-view v-if="$route.meta.keepAlive"></router-view>
-        </keep-alive>
-        <router-view v-if="!$route.meta.keepAlive"></router-view>
+        <transition :name="transitionName">
+            <keep-alive>
+                <router-view v-if="$route.meta.keepAlive" class="router"></router-view>
+            </keep-alive>
+            <router-view v-if="!$route.meta.keepAlive" class="router"></router-view>
+        </transition>
     </div>
 </template>
 
+<script>
+export default {
+    name: 'app',
+    computed: {
+        transitionName() {
+            return this.$store.state.direction
+        }
+    }
+};
+</script>
 <style lang="scss">
 @import "./node_modules/normalize.css/normalize";
 @import "style/common.scss";
@@ -32,5 +44,21 @@ h3 {
 }
 a {
     // font-size: 64px;
+}
+.router{
+  width: 100%;
+  height: 100%;
+  height: 100vh;
+  overflow: scroll;
+  position: fixed;
+  overflow: hidden !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  background: #f0f0f0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #f2f2f2;
 }
 </style>

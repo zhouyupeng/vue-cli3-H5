@@ -73,10 +73,10 @@ module.exports = {
                     minRatio: 0.8
                 })
             )
-            if (process.env.npm_config_report) {
-                // 打包后模块大小分析//npm run build --report
-                config.plugins.push(new BundleAnalyzerPlugin())
-            }
+            // if (process.env.npm_config_report) {
+            //     // 打包后模块大小分析//npm run build --report
+            //     config.plugins.push(new BundleAnalyzerPlugin())
+            // }
         } else {
             // 为开发环境修改配置...
         }
@@ -104,7 +104,7 @@ module.exports = {
     },
     css: {
         // 是否使用css分离插件 ExtractTextPlugin
-        extract:isProduction? true:false,
+        extract:isProduction ? true:false,
         // 开启 CSS source maps?
         sourceMap: false,
         // css预设器配置项
