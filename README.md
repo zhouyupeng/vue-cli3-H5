@@ -29,7 +29,6 @@ yarn run build
 ```
 yarn run test
 ```
-
 ### Lints and fixes files
 ```
 yarn run lint
