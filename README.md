@@ -8,6 +8,8 @@
 
 > demo地址: [https://zhouyupeng.github.io/vuecli3H5/#/](https://zhouyupeng.github.io/vuecli3H5/#/)
 
+[利用Jenkins + nginx 实现前端项目自动构建与持续集成](https://segmentfault.com/a/1190000019212628)
+
 ## Project setup
 ```
 yarn install
