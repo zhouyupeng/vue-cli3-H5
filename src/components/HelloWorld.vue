@@ -1,6 +1,6 @@
 <template>
     <div class="hello">
-       首页9900
+       首页
     </div>
 </template>
 
