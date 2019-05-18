@@ -38,7 +38,6 @@ export default {
                     })
                 }, 3000);
             } catch (error) {
-
             }
         }
     },

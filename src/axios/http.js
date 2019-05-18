@@ -13,7 +13,7 @@ axios.interceptors.request.use(
         // 可在此设置要发送的token
         let token = store.getters['login/token'];
         token && (config.headers.token = token)
-        Indicator.open('数据加载中')
+        // Indicator.open('数据加载中')
         return config
     },
     error => {
@@ -59,6 +59,7 @@ axios.interceptors.response.use(
                     duration: 2000
                 });
         }
+
         return Promise.reject(error.response)
     }
 )
@@ -77,7 +78,7 @@ function get (url, params = {}) {
                 resolve(res.data)
             })
             .catch(err => {
-                reject(err.data)
+                reject(err)
             })
     })
     // 或者return axios.get();
@@ -95,7 +96,7 @@ function post (url, params) {
                 resolve(res.data)
             })
             .catch(err => {
-                reject(err.data)
+                reject(err)
             })
     })
     //  或者return axios.post();
