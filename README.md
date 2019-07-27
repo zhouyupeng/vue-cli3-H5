@@ -2,13 +2,13 @@
 
 文章介绍
 
-### [点击前往](https://segmentfault.com/a/1190000018964794)
+### [点击前往](https://juejin.im/post/5cbf32bc6fb9a03236393379)
 
 ### 2019-05-08更新，增加页面切换动画
 
 > demo地址: [https://zhouyupeng.github.io/vuecli3H5/#/](https://zhouyupeng.github.io/vuecli3H5/#/)
 
-[利用Jenkins + nginx 实现前端项目自动构建与持续集成](https://segmentfault.com/a/1190000019212628)
+[利用Jenkins + nginx 实现前端项目自动构建与持续集成](https://juejin.im/post/5cde525b51882525f77dc0e9)
 
 ## Project setup
 ```
