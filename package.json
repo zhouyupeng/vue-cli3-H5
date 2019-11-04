@@ -31,6 +31,6 @@
     "sass-loader": "^7.1.0",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "vue-template-compiler": "^2.5.21",
-    "webpack-bundle-analyzer": "^3.3.0"
+    "webpack-bundle-analyzer": "^3.3.2"
   }
 }
