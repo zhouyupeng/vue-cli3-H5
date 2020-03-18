@@ -1,9 +1,11 @@
 import { get, post } from '@/axios/http.js'
+import { base } from '@/api/base.js'
+
 function getIndex (params) {
-    return get('/mock/5cb48c7ed491cd741c54456f/base/index', params)
+    return get(base.$api.starred, params)
 }
 function login(params) {
-    return post('/mock/5cb48c7ed491cd741c54456f/base/login', params)
+    return post(base.$api.login, params)
 }
 export {
     getIndex,

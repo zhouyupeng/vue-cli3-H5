@@ -1,9 +1,9 @@
 import axios from 'axios'
 import qs from 'qs'
-import store from 'store/index'
+// import store from 'store/index'
 import { Indicator, Toast } from 'mint-ui'
 axios.defaults.timeout = 12000 // 请求超时时间
-axios.defaults.baseURL = process.env.VUE_APP_BASE_API
+// axios.defaults.baseURL = process.env.VUE_APP_BASE_API
 
 axios.defaults.headers.post['Content-Type'] =
     'application/x-www-form-urlencoded;charset=UTF-8' // post请求头的设置
@@ -11,8 +11,8 @@ axios.defaults.headers.post['Content-Type'] =
 axios.interceptors.request.use(
     config => {
         // 可在此设置要发送的token
-        let token = store.getters['login/token'];
-        token && (config.headers.token = token)
+        // let token = store.getters['login/token'];
+        // token && (config.headers.token = token)
         // Indicator.open('数据加载中')
         return config
     },

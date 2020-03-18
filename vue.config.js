@@ -1,7 +1,7 @@
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
     .BundleAnalyzerPlugin
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+
 const isProduction = process.env.NODE_ENV === 'production'
 // cdn预加载使用
 const externals = {
@@ -46,22 +46,6 @@ module.exports = {
             Object.assign(config, {
                 externals: externals
             })
-            // 为生产环境修改配置...
-            // 上线压缩去除console等信息
-            config.plugins.push(
-                new UglifyJsPlugin({
-                    uglifyOptions: {
-                        warnings: false,
-                        compress: {
-                            drop_console: true,
-                            drop_debugger: false,
-                            pure_funcs: ['console.log'] // 移除console
-                        }
-                    },
-                    sourceMap: false,
-                    parallel: true
-                })
-            )
             // 开启gzip压缩
             const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i
             config.plugins.push(
@@ -73,16 +57,22 @@ module.exports = {
                     minRatio: 0.8
                 })
             )
-            // if (process.env.npm_config_report) {
-            //     // 打包后模块大小分析//npm run build --report
-            //     config.plugins.push(new BundleAnalyzerPlugin())
-            // }
+            if (process.env.npm_config_report) {
+                // 打包后模块大小分析//npm run build --report
+                config.plugins.push(new BundleAnalyzerPlugin())
+            }
         } else {
             // 为开发环境修改配置...
         }
     },
     chainWebpack: config => {
-        // 对vue-cli内部的 webpack 配置进行更细粒度的修改。
+        // 对vue-cli内部的 webpack 配置进行更细粒度的修改
+        config.optimization.minimizer('terser').tap((args) => {
+            // 去除生产环境console
+            args[0].terserOptions.compress.drop_console = true
+            return args
+        })
+
         // 添加CDN参数到htmlWebpackPlugin配置中， 详见public/index.html 修改
         config.plugin('html').tap(args => {
             if (process.env.NODE_ENV === 'production') {
@@ -104,12 +94,11 @@ module.exports = {
     },
     css: {
         // 是否使用css分离插件 ExtractTextPlugin
-        extract:isProduction ? true:false,
+        extract: !!isProduction,
         // 开启 CSS source maps?
         sourceMap: false,
-        // css预设器配置项
-        // 启用 CSS modules for all css / pre-processor files.
-        modules: false,
+        // 如果你想去掉文件名中的 .module
+        requireModuleExtension: false,
         loaderOptions: {
             postcss: {
                 // 这是rem适配的配置
@@ -120,7 +109,7 @@ module.exports = {
                 ]
             },
             sass: {
-                data: '@import "style/_mixin.scss";@import "style/_variables.scss";' // 全局引入
+                prependData: '@import "style/_mixin.scss";@import "style/_variables.scss";' // 全局引入
             }
         }
     },
@@ -134,6 +123,23 @@ module.exports = {
         https: false,
         hotOnly: false,
         // 设置代理，用来解决本地开发跨域问题，如果设置了代理，那你本地开发环境的axios的baseUrl要写为 '' ，即空字符串
-        proxy: 'https://easy-mock.com/' // 设置代理
+        proxy: {
+            [process.env.VUE_APP_BASE_API]: {
+                target: 'https://www.fastmock.site',
+                secure: false,
+                changeOrigin: true,
+                pathRewrite: {
+                    [`^${process.env.VUE_APP_BASE_API}`]: ''
+                }
+            },
+            [process.env.VUE_APP_BASE_BASE2_API]: {
+                target: 'https://getman.cn',
+                changeOrigin: true,
+                secure: false,
+                pathRewrite: {
+                    [`^${process.env.VUE_APP_BASE_BASE2_API}`]: ''
+                }
+            }
+        }
     }
 }
