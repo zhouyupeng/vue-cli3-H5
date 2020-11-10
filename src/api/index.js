@@ -7,7 +7,11 @@ function getIndex (params) {
 function login(params) {
     return post(base.$api.login, params)
 }
+function weChatJsSDK(params) {
+    return post(base.$api.wxLogin, params)
+}
 export {
     getIndex,
-    login
+    login,
+    weChatJsSDK
 }

@@ -1,11 +1,9 @@
 <template>
     <div id="app">
-        <transition :name="transitionName">
             <keep-alive>
                 <router-view v-if="$route.meta.keepAlive" class="router"></router-view>
             </keep-alive>
             <router-view v-if="!$route.meta.keepAlive" class="router"></router-view>
-        </transition>
     </div>
 </template>
 
@@ -13,9 +11,6 @@
 export default {
     name: 'app',
     computed: {
-        transitionName() {
-            return this.$store.state.direction
-        }
     }
 };
 </script>

@@ -2,8 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import store from 'store/index'
+import wxAuth from './views/wxAuth'// 授权登录
 Vue.use(Router)
 const router = new Router({
+    mode: 'history',
     routes: [
         {
             path: '/',
@@ -11,7 +13,7 @@ const router = new Router({
             component: Home,
             meta: {
                 auth: false, // 是否需要登录
-                keepAlive: true // 是否缓存组件
+                keepAlive: false // 是否缓存组件
             }
         },
         {
@@ -24,8 +26,19 @@ const router = new Router({
                 import(/* webpackChunkName: "about" */ './views/About.vue'),
             meta: {
                 auth: true,
-                keepAlive: true
+                keepAlive: false
             }
+        },
+        {
+            path: '/wxAuth',
+            name: 'wxAuth',
+            component: wxAuth,
+            meta: {
+                auth: false, // 是否需要登录
+                keepAlive: false, // 是否缓存组件
+                title: '登录中'
+            }
+
         },
         {
             path: '/login',
@@ -34,7 +47,7 @@ const router = new Router({
                 import(/* webpackChunkName: "login" */ './views/login.vue'),
             meta: {
                 auth: false,
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -47,49 +60,55 @@ const router = new Router({
         }
     ]
 })
-// 记录页面跳转历史，以此判断页面左滑跳转还是右滑跳转
-const history = window.sessionStorage
-history.clear()
-let historyCount = history.getItem('count') * 1 || 0
-history.setItem('/', 0)
 
 // 全局路由钩子函数 对全局有效
 router.beforeEach((to, from, next) => {
     let auth = to.meta.auth
     let token = store.getters['login/token'];
-    // 当跳转时携带指定方向参数则优先使用指定参数
-    if (to.params.direction) {
-        store.commit('updateDirection', to.params.direction)
+    if (to.meta.keepAlive == false) {
+        console.log('不需要缓存 ');
+        setTimeout(() => {
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+        }, 10)
     } else {
-        const toIndex = history.getItem(to.path)
-        const fromIndex = history.getItem(from.path)
-        // 判断并记录跳转页面是否访问过，以此判断跳转过渡方式
-        if (toIndex) {
-            if (!fromIndex || parseInt(toIndex, 10) > parseInt(fromIndex, 10) || (toIndex === '0' && fromIndex === '0')) {
-                store.commit('updateDirection', 'forward')
-            } else {
-                store.commit('updateDirection', 'back')
-            }
-        } else {
-            ++historyCount
-            history.setItem('count', historyCount)
-            to.path !== '/' && history.setItem(to.path, historyCount)
-            store.commit('updateDirection', 'forward')
-        }
+        console.log('需要缓存' + store.state.scrollTop[to.name]);
+        setTimeout(() => {
+            document.documentElement.scrollTop = store.state.scrollTop[to.name];
+            document.body.scrollTop = store.state.scrollTop[to.name];
+        }, 50)
     }
     if (auth) { // 需要登录
         if (token) {
+            if (to.meta.title) {
+                document.title = to.meta.title
+            }
             next()
         } else {
             next({
-                path: '/login',
+                path: Vue.client.WEIXIN ? '/wxAuth' : '/login',
                 query: {
-                    redirect: to.fullPath
+                    fullPath: to.fullPath
                 }
             })
         }
     } else {
+        if (to.meta.title) {
+            document.title = to.meta.title
+        }
         next()
     }
+})
+// 结合keep-alive 实现记录列表页滚动条位置
+router.beforeEach((to, from, next) => {
+    console.log('from--', from);
+    // 要离开页面如果设置为需要缓存，则本页是要记住上滚动高度到vuex中，以便下次进来恢复高度
+    if (from.meta.keepAlive == true) {
+        store.commit('recordScroll', {
+            name: from.name,
+            num: document.documentElement.scrollTop || document.body.scrollTop
+        }); // document.body.scrollTop一定要加不然iOS上会失效，本人亲测，踩坑
+    }
+    next()
 })
 export default router

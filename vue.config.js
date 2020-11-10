@@ -98,16 +98,8 @@ module.exports = {
         // 开启 CSS source maps?
         sourceMap: false,
         // 如果你想去掉文件名中的 .module
-        requireModuleExtension: false,
+        // requireModuleExtension: false,使用vw布局去掉这个
         loaderOptions: {
-            postcss: {
-                // 这是rem适配的配置
-                plugins: [
-                    require('postcss-px2rem')({
-                        remUnit: 100
-                    })
-                ]
-            },
             sass: {
                 prependData: '@import "style/_mixin.scss";@import "style/_variables.scss";' // 全局引入
             }
@@ -122,6 +114,10 @@ module.exports = {
         port: 8088, // 服务端口
         https: false,
         hotOnly: false,
+        overlay: {
+            warnings: true,
+            errors: true
+        },
         // 设置代理，用来解决本地开发跨域问题，如果设置了代理，那你本地开发环境的axios的baseUrl要写为 '' ，即空字符串
         proxy: {
             [process.env.VUE_APP_BASE_API]: {

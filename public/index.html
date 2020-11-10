@@ -8,7 +8,6 @@
 	<link rel="dns-prefetch" href="//lib.baomitu.com" />
 	<meta name="viewport"
 		content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0,minimal-ui,viewport-fit=cover" />
-
 	<link rel="icon" href="<%= BASE_URL %>favicon.ico" />
 	<!-- 使用CDN加速的CSS文件，配置在vue.config.js下 -->
 	<% for (var i in
@@ -16,7 +15,7 @@
 	<link href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" rel="preload" as="style" />
 	<link href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" rel="stylesheet" />
 	<% } %>
-
+	<script src="http://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
 	<title>vuedemo</title>
 </head>
 

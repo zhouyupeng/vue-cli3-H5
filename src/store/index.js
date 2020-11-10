@@ -6,11 +6,11 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     modules: { login, index },
     state: {
-        direction: 'forward'
+        scrollTop: {}
     },
     mutations: {
-        updateDirection (state, direction) {
-            state.direction = direction
+        recordScroll(state, data) {
+            state.scrollTop[data.name] = data.num
         }
     },
     actions: {}

@@ -1,5 +1,12 @@
 
-基于[vue-cli3搭建的前端H5模板](https://juejin.im/post/5cbf32bc6fb9a03236393379)的升级，主要把vue-cli3项目升级为vue-cli4，并删除一些过时插件。插件版本升级到当前(2020-03-19)最高版本，升级完后新加**多域名代理配置**，官方升级文档[点我点我](https://cli.vuejs.org/migrating-from-v3/#upgrade-all-plugins-at-once)
+#### 基于vue-cli4搭建的前端H5模板
+2020-11-10 根据实际项目使用更新配置，移动端可直接拿来就用
+- [x]使用vw布局
+- [x]微信授权登录，路由history模式下解决授权中IOS和安卓微信中出现的问题
+- [x]eslint + standard设置
+- [x]多环境变量配置
+- [x]axios 请求封装
+
 
 文章介绍
 

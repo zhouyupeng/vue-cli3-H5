@@ -32,12 +32,31 @@ export default {
                     duration: 2000
                 });
                 setTimeout(() => {
-                    const redirect = data.$route.query.redirect || '/';
+                    const redirect = data.$route.query.fullPath || '/';
                     data.$router.replace({
                         path: redirect
                     })
                 }, 3000);
             } catch (error) {
+            }
+        },
+        async wxLogin (state, data) {
+            try {
+                const res = await login({
+                    code: data.code
+                })
+                console.log('res', res);
+                console.log('data.router', data.$router);
+                state.commit(type.LOGIN, res)
+                setTimeout(() => {
+                    const redirect = data.$route.query.fullPath || '/';
+                    window.location.href = redirect; // 微信分享平台兼容 改成强跳
+                }, 300)
+            } catch (error) {
+                data.$router.replace({
+                    path: '/'
+                })
+                console.log('rror', error);
             }
         }
     },
