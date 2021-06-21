@@ -10,11 +10,11 @@ export default {
     mutations: {
 
         [type.LOGIN](state, data) {
-            let userDate = data.data;
-            state.token = userDate.token;
-            state.user = userDate;
-            localStorage.setItem('token', userDate.token)
-            localStorage.setItem('userDate', JSON.stringify(userDate))
+            let userData = data.data;
+            state.token = userData.token;
+            state.user = userData;
+            localStorage.setItem('token', userData.token)
+            localStorage.setItem('userDate', JSON.stringify(userData))
         }
 
     },
