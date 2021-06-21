@@ -5,7 +5,7 @@ export default {
     namespaced: true,
     state: {
         token: localStorage.getItem('token') || '',
-        user: JSON.parse(localStorage.getItem('userDate')) || {}
+        user: JSON.parse(localStorage.getItem('userData')) || {}
     },
     mutations: {
 
