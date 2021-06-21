@@ -14,7 +14,7 @@ export default {
             state.token = userData.token;
             state.user = userData;
             localStorage.setItem('token', userData.token)
-            localStorage.setItem('userDate', JSON.stringify(userData))
+            localStorage.setItem('userData', JSON.stringify(userData))
         }
 
     },
