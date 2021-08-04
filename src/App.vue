@@ -1,7 +1,7 @@
 <template>
     <div id="app">
-            <keep-alive>
-                <router-view v-if="$route.meta.keepAlive" class="router"></router-view>
+            <keep-alive  v-if="$route.meta.keepAlive">
+                <router-view class="router"></router-view>
             </keep-alive>
             <router-view v-if="!$route.meta.keepAlive" class="router"></router-view>
     </div>
