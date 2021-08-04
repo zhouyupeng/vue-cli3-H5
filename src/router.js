@@ -11,7 +11,7 @@ const router = new Router({
             component: Home,
             meta: {
                 auth: false, // 是否需要登录
-                keepAlive: true // 是否缓存组件
+                keepAlive: false // 是否缓存组件
             }
         },
         {
