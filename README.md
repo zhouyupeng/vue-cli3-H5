@@ -1,6 +1,3 @@
-#### 800多道面试题小程序
-![](https://tva1.sinaimg.cn/large/008i3skNgy1gsx0qo4qvqj30by0byq3h.jpg)
-
 
 #### 升级到vue-cli4配置最新配置 [点我](https://github.com/zhouyupeng/vue-cli3-H5/tree/0.0.1)（2020-11-10）
 
