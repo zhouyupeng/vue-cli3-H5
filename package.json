@@ -27,7 +27,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "node-sass": "^4.9.0",
     "postcss-px2rem": "^0.3.0",
-    "qs": "^6.7.0",
+    "qs": "^6.10.3",
     "sass-loader": "^7.1.0",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "vue-template-compiler": "^2.5.21",
